@@ -2,11 +2,6 @@
 
 ## Kubectl
 
-
-### Hint
-
-kubectl run ubuntu-pod -it --image ubuntu
-
 ### Context 
 
 kubectl config use-context <name>
@@ -19,6 +14,10 @@ kubectl config rename-context <old_name> <new_name>
 
 kubectl config get-clusters
 kubectl cluster-info
+
+### Nodes
+
+kubectl get nodes
 
 ### Manifest
 
@@ -50,7 +49,6 @@ kubectl describe service <service>
 kubectl describe service pod-api-service
 kubectl delete service 
 
-
 ### Ingress (Reverse Proxy)
 
 - https://github.com/kubernetes/ingress-nginx
@@ -71,7 +69,6 @@ aws eks update-kubeconfig --region <region> --name <cluster>
 ### Docker
 
 docker login -u <user> 
-dckr_pat_ySqMjaoFX2UNxOtXB1VjFnH8BF0
 
 ### Minikube
 
@@ -89,8 +86,20 @@ pass init acnaweb
 
 gpg --generate-key
 pass init <generated gpg-id public key>
-pass init 78AB0E25918FFA7
 
+
+### Dashboard
+
+- https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
+- http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
+
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+kubectl proxy
+
+### Hint
+
+kubectl run ubuntu-pod -it --image ubuntu
 
 ## References
 
