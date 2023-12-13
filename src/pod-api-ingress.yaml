@@ -1,0 +1,17 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: api-ing
+spec:
+  ingressClassName: nginx-example
+  rules:
+  - http:
+      paths:
+      - path: "/teste"
+        pathType: Prefix
+        backend:
+          service:
+            name: pod-api-svc
+            port:
+              number: 8085

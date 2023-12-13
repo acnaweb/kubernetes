@@ -26,10 +26,10 @@ kubectl create -f <manifest_file> --save-config
 kubectl apply -f <manifest_file>
 kubectl delete -f <manifest_file>
 
-kubectl create -f src/mongodb.pod.yaml  --save-config
-kubectl apply -f src/mongodb.pod.yaml
-kubectl delete -f src/mongodb.pod.yaml
-kubectl apply -f src/simple-node-api.service.yaml
+kubectl apply -f src/pod-mongodb.yaml
+kubectl apply -f src/pod-api.yaml
+kubectl apply -f src/pod-api-service.yaml
+kubectl apply -f src/pod-api-ingress.yaml
 
 ### Pod
 
@@ -55,6 +55,9 @@ kubectl delete service
 
 - https://github.com/kubernetes/ingress-nginx
 
+helm upgrade --install ingress-nginx ingress-nginx \
+  --repo https://kubernetes.github.io/ingress-nginx \
+  --namespace ingress-nginx --create-namespace
 
 ### AWS
 
@@ -71,7 +74,6 @@ docker login -u <user>
 dckr_pat_ySqMjaoFX2UNxOtXB1VjFnH8BF0
 
 ### Minikube
-
 
 minikube addons enable ingress
 minikube ip
