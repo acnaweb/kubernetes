@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pod-api-service
+spec:  
+  selector:
+    app: simple-api  
+  type: NodePort
+  ports:
+  - protocol: TCP
+    port: 8085
+    nodePort: 9090
+    targetPort: "port-api"
