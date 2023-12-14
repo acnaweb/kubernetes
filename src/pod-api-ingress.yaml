@@ -9,7 +9,7 @@ spec:
     - host: minhaapi.info
       http:
         paths:
-          - path: "/teste"
+          - path: "/"
             pathType: Prefix
             backend:
               service:
