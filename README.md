@@ -104,6 +104,81 @@ kubectl proxy
 
 kubectl run ubuntu-pod -it --image ubuntu
 
+### Helm
+
+helm list
+helm status <release>
+helm search hub <chart>
+
+https://artifacthub.io/
+
+* MinIO
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm install minio bitnami/minio --version 12.10.9
+helm install <release name> --values=<path to custom values yaml> <path to charts directory>
+
+helm install minio --values=<path to custom values yaml> <path to charts directory>
+
+
+https://min.io/docs/minio/kubernetes/upstream/operations/install-deploy-manage/deploy-operator-helm.html
+
+helm repo add minio-operator https://operator.min.io
+helm install --namespace minio-operator --create-namespace operator minio-operator/operator
+
+
+- helm install my-release -f values.yaml oci://REGISTRY_NAME/REPOSITORY_NAME/minio
+
+helm repo add minio-operator https://operator.min.io
+
+quay.io/minio
+
+
+
+* Operator MinIO
+
+https://github.com/minio/operator/tree/master/helm/operator
+https://github.com/minio/operator/tree/v5.0.10/helm/tenant
+
+
+values = https://github.com/minio/operator/blob/master/helm/tenant/values.yaml
+
+helm repo add minio https://operator.min.io/
+
+helm install \
+  --namespace minio-operator \
+  --create-namespace \
+  minio-operator minio/operator
+
+helm install --namespace minio-home \
+  -f ./charts/minio/minio_home_values.yaml \
+  --create-namespace tenant minio/tenant  
+
+kubectl -n minio-operator  get secret console-sa-secret -o jsonpath="{.data.token}" | base64 --decode
+kubectl --namespace minio-operator port-forward svc/console 9090:9090
+kubectl --namespace minio-home port-forward svc/minio-home-console 9443:9443
+
+
+helm delete minio-operator --namespace minio-operator
+helm delete tenant --namespace  minio-home
+kubectl delete pvc --all -n  minio-home
+
+
+
+* Airbyte
+
+helm repo add airbyte https://airbytehq.github.io/helm-charts
+helm install my-airbyte airbyte/airbyte --version 0.50.17
+
+* Hive
+helm repo add data-platform https://khwj.github.io/data-platform-charts
+helm install my-hive-metastore data-platform/hive-metastore --version 0.1.2
+
+
+
+* Spark
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm install my-spark bitnami/spark --version 8.1.6
+
 ## References
 
 - https://superuser.com/questions/816143/how-to-run-pip-in-non-interactive-mode
