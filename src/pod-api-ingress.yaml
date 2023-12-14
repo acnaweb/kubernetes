@@ -5,8 +5,13 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$1
 spec:
+  backend:
+    service:
+      name: pod-api-svc
+      port:
+        number: 8085  
   rules:
-    - host: minhaapi.info
+    - host: api.minhaapi.info
       http:
         paths:
           - path: "/"
@@ -15,4 +20,41 @@ spec:
               service:
                 name: pod-api-svc
                 port:
+                  number: 8085  
+    - host: app.minhaapi.info
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: pod-api-svc
+                port:
+                  number: 8085                    
+    - host: minhaapi.info
+      http:
+        paths:
+          - path: "/user"
+            pathType: Prefix
+            backend:
+              service:
+                name: pod-api-svc
+                port:
                   number: 8085
+          - path: "/products"
+            pathType: Prefix
+            backend:
+              service:
+                name: pod-api-svc
+                port:
+                  number: 8085                  
+    - host: minhaapi.info.192.168.49.2.nip.io
+      http:
+        paths:
+          - path: "/api"
+            pathType: Prefix
+            backend:
+              service:
+                name: pod-api-svc
+                port:
+                  number: 8085                  

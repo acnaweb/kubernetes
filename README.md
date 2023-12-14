@@ -55,7 +55,6 @@ kubectl delete service
 - https://github.com/kubernetes/ingress-nginx
 - https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/
 
-
 minikube addons enable ingress
 
 helm upgrade --install ingress-nginx ingress-nginx \

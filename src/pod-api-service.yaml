@@ -5,9 +5,9 @@ metadata:
 spec:  
   selector:
     app: simple-api  
-  type: NodePort
+  type: ClusterIP
   ports:
   - protocol: TCP
     port: 8085
-    nodePort: 30000
+    # nodePort: 30000
     targetPort: "port-api"

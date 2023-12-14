@@ -22,7 +22,7 @@ spec:
     livenessProbe:
       httpGet:
         path: /healthy
-        port: 8081
+        port: 8080
       initialDelaySeconds: 5
       timeoutSeconds: 1
       periodSeconds: 10
