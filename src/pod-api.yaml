@@ -6,12 +6,19 @@ metadata:
     app: simple-api  
     version: 0.0.1
 spec:
+  volumes:
+    - name: "api-data"
+      hostPath:
+        path: "/var/lib/data"
   containers:
   - name: simple-api
     image: acnaweb/simple-node-api
     env:
       - name: "PORT"
         value: "8080"
+    volumeMounts:
+      - mountPath: "/data"
+        name: "api-data"
     livenessProbe:
       httpGet:
         path: /healthy
@@ -20,6 +27,13 @@ spec:
       timeoutSeconds: 1
       periodSeconds: 10
       failureThreshold: 3
+    resources:
+      requests:
+        cpu: "500m"
+        memory: "128Mi"
+      limits:
+        cpu: "500m"
+        memory: "128Mi"        
     ports:
     - containerPort: 8080
       name: "port-api"

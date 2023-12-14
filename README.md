@@ -51,7 +51,12 @@ kubectl delete service
 
 ### Ingress (Reverse Proxy)
 
+
 - https://github.com/kubernetes/ingress-nginx
+- https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/
+
+
+minikube addons enable ingress
 
 helm upgrade --install ingress-nginx ingress-nginx \
   --repo https://kubernetes.github.io/ingress-nginx \
@@ -72,9 +77,8 @@ docker login -u <user>
 
 ### Minikube
 
-minikube addons enable ingress
 minikube ip
-minikube service <service>
+minikube service <service> --url
 minikube service pod-api-service
 
 ### Pass
