@@ -221,7 +221,7 @@ tenant:
     externalCertSecret: [ ]
     ###
     # Enable automatic Kubernetes based `certificate generation and signing <https://kubernetes.io/docs/tasks/tls/managing-tls-in-a-cluster>`__
-    requestAutoCert: true
+    requestAutoCert: false
     ###
     # This field is used only when ``requestAutoCert: true``.
     # Use this field to set CommonName for the auto-generated certificate. 
@@ -277,7 +277,10 @@ tenant:
   # - Specify ``console: true`` to expose the Console.
   #
   # Both fields default to ``false``.
-  exposeServices: { }
+  exposeServices: 
+    minio: true
+    console": true
+  
   ###
   # The `Kubernetes Service Account <https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/>`__ associated with the Tenant.
   serviceAccountName: ""
@@ -433,8 +436,8 @@ ingress:
     labels: { }
     annotations: { }
     tls: [ ]
-    host: minio.local
-    path: /
+    host: cluster
+    path: /minio-home-api
     pathType: Prefix
   console:
     enabled: true
@@ -442,8 +445,8 @@ ingress:
     labels: { }
     annotations: { }
     tls: [ ]
-    host: minio-console.local
-    path: /
+    host: cluster
+    path: /minio-home-console
     pathType: Prefix
 # Use an extraResources template section to include additional Kubernetes resources
 # with the Helm deployment.

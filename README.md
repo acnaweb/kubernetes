@@ -113,31 +113,8 @@ helm search hub <chart>
 https://artifacthub.io/
 
 * MinIO
-helm repo add bitnami https://charts.bitnami.com/bitnami
-helm install minio bitnami/minio --version 12.10.9
-helm install <release name> --values=<path to custom values yaml> <path to charts directory>
 
-helm install minio --values=<path to custom values yaml> <path to charts directory>
-
-
-https://min.io/docs/minio/kubernetes/upstream/operations/install-deploy-manage/deploy-operator-helm.html
-
-helm repo add minio-operator https://operator.min.io
-helm install --namespace minio-operator --create-namespace operator minio-operator/operator
-
-
-- helm install my-release -f values.yaml oci://REGISTRY_NAME/REPOSITORY_NAME/minio
-
-helm repo add minio-operator https://operator.min.io
-
-quay.io/minio
-
-
-
-* Operator MinIO
-
-https://github.com/minio/operator/tree/master/helm/operator
-https://github.com/minio/operator/tree/v5.0.10/helm/tenant
+https://github.com/minio/operator/
 
 
 values = https://github.com/minio/operator/blob/master/helm/tenant/values.yaml
@@ -155,14 +132,11 @@ helm install --namespace minio-home \
 
 kubectl -n minio-operator  get secret console-sa-secret -o jsonpath="{.data.token}" | base64 --decode
 kubectl --namespace minio-operator port-forward svc/console 9090:9090
-kubectl --namespace minio-home port-forward svc/minio-home-console 9443:9443
-
+kubectl --namespace minio-home port-forward svc/minio-home-console 9090:9090
 
 helm delete minio-operator --namespace minio-operator
 helm delete tenant --namespace  minio-home
 kubectl delete pvc --all -n  minio-home
-
-
 
 * Airbyte
 
