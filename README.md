@@ -6,7 +6,11 @@
 
 #### ClusterIP
 
-Comunicação entre os Pods por `servicename`
+Comunicação entre os Pods dentro do cluster por `servicename`
+
+#### NodePort
+
+Acesso externo ao cluster mantendo ClusterIP
 
 ## Kubectl
 
@@ -26,6 +30,7 @@ Comunicação entre os Pods por `servicename`
 ### Nodes
 
 > * kubectl get nodes
+> * kubectl get nodes -o wide
 
 ### Manifest
 
@@ -41,7 +46,7 @@ Comunicação entre os Pods por `servicename`
 ### Pod
 
 > * kubectl run <pod> --image=<image> --port=<port>
-> * kubectl get pods
+> * kubectl get pods -o wide
 > * kubectl delete pod <pod> --force
 > * kubectl logs <pod>
 > * kubectl describe pod <pod>
@@ -58,7 +63,6 @@ Comunicação entre os Pods por `servicename`
 > * kubectl delete service 
 
 ### Ingress (Reverse Proxy)
-
 
 - https://github.com/kubernetes/ingress-nginx
 - https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/
