@@ -121,35 +121,39 @@ values = https://github.com/minio/operator/blob/master/helm/tenant/values.yaml
 
 helm repo add minio https://operator.min.io/
 
-helm install \
-  --namespace minio-operator \
-  --create-namespace \
+helm install --namespace minio-operator --create-namespace \
   minio-operator minio/operator
 
-helm install --namespace minio-home \
+helm install --namespace minio-home --create-namespace \
   -f ./charts/minio/minio_home_values.yaml \
-  --create-namespace tenant minio/tenant  
+  tenant minio/tenant  
 
 kubectl -n minio-operator  get secret console-sa-secret -o jsonpath="{.data.token}" | base64 --decode
 kubectl --namespace minio-operator port-forward svc/console 9090:9090
 kubectl --namespace minio-home port-forward svc/minio-home-console 9090:9090
 
 helm delete minio-operator --namespace minio-operator
-helm delete tenant --namespace  minio-home
-kubectl delete pvc --all -n  minio-home
+helm delete tenant --namespace minio-home
+kubectl delete pvc --all -n minio-home
 
 * Airbyte
 
 helm repo add airbyte https://airbytehq.github.io/helm-charts
-helm install my-airbyte airbyte/airbyte --version 0.50.17
+helm install --namespace airbyte --create-namespace  \
+  -f ./charts/airbyte/values.yaml \
+  airbyte airbyte/airbyte --version 0.50.17
+
+helm delete airbyte --namespace airbyte
+
+kubectl delete pvc --all -n airbyte
 
 * Hive
+
 helm repo add data-platform https://khwj.github.io/data-platform-charts
 helm install my-hive-metastore data-platform/hive-metastore --version 0.1.2
 
-
-
 * Spark
+
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm install my-spark bitnami/spark --version 8.1.6
 
