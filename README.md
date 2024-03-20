@@ -1,5 +1,13 @@
 # Kubernetes
 
+## Kubernetes
+
+### Services
+
+#### ClusterIP
+
+Comunicação entre os Pods por `servicename`
+
 ## Kubectl
 
 ### Context 
@@ -65,7 +73,7 @@ helm upgrade --install ingress-nginx ingress-nginx \
   --namespace ingress-nginx --create-namespace
 ```
 
-### AWS
+## AWS
 
 > * aws configure
 > * aws sts get-caller-identity
@@ -74,17 +82,17 @@ helm upgrade --install ingress-nginx ingress-nginx \
 > * aws eks describe-cluster --name <cluster>
 > * aws eks update-kubeconfig --region <region> --name <cluster>
 
-### Docker
+## Docker
 
 > * docker login -u <user> 
 
-### Minikube
+## Minikube
 
 > * minikube ip
 > * minikube service <service> --url
 > * minikube service pod-api-service
 
-### Pass
+## Pass
 
 > * pass
 > * pass init acnaweb
@@ -95,7 +103,7 @@ helm upgrade --install ingress-nginx ingress-nginx \
 > * pass init <generated gpg-id public key>
 
 
-### Dashboard
+## Dashboard
 
 - https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
 - http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
@@ -111,7 +119,7 @@ kubectl proxy
 kubectl run ubuntu-pod -it --image ubuntu
 ```
 
-### Helm
+## Helm
 
 > * helm list
 > * helm status <release>
@@ -119,7 +127,7 @@ kubectl run ubuntu-pod -it --image ubuntu
 
 https://artifacthub.io/
 
-* MinIO
+### MinIO
 
 https://github.com/minio/operator/
 
@@ -145,7 +153,8 @@ helm delete minio-operator --namespace minio-operator
 helm delete tenant --namespace minio-home
 kubectl delete pvc --all -n minio-home
 ```
-* Airbyte
+
+### Airbyte
 
 ```sh
 helm repo add airbyte https://airbytehq.github.io/helm-charts
@@ -158,14 +167,14 @@ helm delete airbyte --namespace airbyte
 kubectl delete pvc --all -n airbyte
 ```
 
-* Hive
+### Hive
 
 ```sh
 helm repo add data-platform https://khwj.github.io/data-platform-charts
 helm install my-hive-metastore data-platform/hive-metastore --version 0.1.2
 ```
 
-* Spark
+### Spark
 
 ```sh
 helm repo add bitnami https://charts.bitnami.com/bitnami
