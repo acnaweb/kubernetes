@@ -11,7 +11,6 @@ k get svc <svcname> -o yaml
 k apply -f <file.yaml>
 ```
 
-
 ### Config
 
 ```sh
@@ -19,7 +18,6 @@ k apply -f <file.yaml>
 k config set-context --current --namespace devops
 k config set-context --current --namespace default
 ```
-
 
 ### Namespaces
 
@@ -37,6 +35,19 @@ k create ns devops --dry-run=client -oyaml | k neat
 
 ```sh
 k logs -n default nginx
+k logs muticontainer-pod -c httpd
+k logs muticontainer-pod -c debug
+```
+
+### Exec
+
+```sh
+k exec -it muticontainer-pod -c httpd -- sh
+k exec -it muticontainer-pod -c debug -- sh
+
+# mesmo host
+k exec muticontainer-pod -c httpd -- hostname
+k exec muticontainer-pod -c debug -- hostname
 
 ```
 
@@ -78,7 +89,6 @@ k delete service mysqlserver
 ### Krew
 
 - https://krew.sigs.k8s.io/
-
 
 ## References
 

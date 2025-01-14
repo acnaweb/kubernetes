@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: muticontainer-pod
+  name: muticontainer-pod
+spec:
+  containers:
+  - image: httpd
+    name: httpd
+  - image: ubuntu
+    name: debug
+    # command:
+    #   - "sleep"
+    #   - "9999999999"
+

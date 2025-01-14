@@ -1,7 +1,9 @@
-create_cluster:
+kind_create_cluster:
 	cd cluster-kind && \
 	kind create cluster --config config.yaml --name devops --kubeconfig config
 
+start_minikube:
+	minikube start
 
 deploy:
 	kubectl apply -f src/mongodb.pod.yaml; \
