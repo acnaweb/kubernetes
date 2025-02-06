@@ -1,5 +1,9 @@
 # Kubernetes
 
+```sh
+export KUBE_EDITOR=nano
+```
+
 ## Kubernetes
 
 ### To organize
@@ -9,6 +13,40 @@ k api-resources
 k get po <podname> -o yaml
 k get svc <svcname> -o yaml
 k apply -f <file.yaml>
+```
+
+### Explain
+
+```sh
+k explain deployment
+k explain deployment.spec
+k explain deployment.spec.template
+```
+
+### Rollout
+
+```sh
+k rollout 
+```
+
+### Deployments
+
+```sh
+k create deployment --image httpd httpd
+k get deploy
+k get deploy httpd -oyaml | k neat >> deployments/nginx-deploy.yaml
+k create deployment --image httpd httpd --dry-run -oyaml | k neat >> deployments/nginx-deploy1.yaml
+k delete deploy httpd
+k create deployment --image httpd httpd --replicas 3
+k edit deploy httpd
+k get deploy --show-labels
+k get deploy --show-labels
+```
+
+### Replicasets
+
+```sh
+k get rs
 ```
 
 ### Config
@@ -48,7 +86,6 @@ k exec -it muticontainer-pod -c debug -- sh
 # mesmo host
 k exec muticontainer-pod -c httpd -- hostname
 k exec muticontainer-pod -c debug -- hostname
-
 ```
 
 ### Pods
@@ -59,6 +96,7 @@ k run -it --rm --image ubuntu server sh
 k run --image hashicorp/terraform terraform --dry-run -oyaml | k neat > pods/terraform.yaml
 k exec -it terraform -- sh
 k get po -w 
+k get po -l app=httpd
 ```
 
 ### Init Container
